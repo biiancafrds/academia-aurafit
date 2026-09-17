@@ -1,0 +1,828 @@
+<!DOCTYPE html>
+<!-- Aura Fit — Landing com planos/preços -->
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Aura Fit</title>
+  <meta name="description" content="Site da academia com planos, horários e modalidades." />
+  <link rel="stylesheet" href="styles.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
+
+  <!-- ============================= -->
+  <!-- CSS ADICIONADO: rodapé + busca de unidades -->
+  <!-- Se preferir, mova este bloco para dentro do styles.css -->
+  <!-- ============================= -->
+  <style>
+    /* ---------- RODAPÉ (tema azul + logos SVG) ---------- */
+    .site-footer {
+      background: #0d1424;
+      color: #c7d0dd;
+      padding: 60px 40px 0;
+      font-family: inherit;
+    }
+
+    .footer-container {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 40px;
+      max-width: 1200px;
+      margin: 0 auto;
+      padding-bottom: 40px;
+      text-align: left;
+    }
+
+    .footer-column {
+      flex: 1;
+      min-width: 200px;
+    }
+
+    .footer-brand {
+      flex: 1.5;
+      min-width: 260px;
+    }
+
+    .logo-text {
+      font-family: Georgia, serif;
+      font-size: 1.6rem;
+      color: #ffffff;
+      display: block;
+      margin-bottom: 16px;
+    }
+
+    .footer-brand p {
+      color: #9fb0c3;
+      line-height: 1.6;
+      margin-bottom: 20px;
+      font-size: 0.95rem;
+    }
+
+    .social-links {
+      display: flex;
+      gap: 12px;
+    }
+
+    .social-icon {
+      width: 38px;
+      height: 38px;
+      border: 1px solid #3aa0ff;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #3aa0ff;
+      text-decoration: none;
+      transition: background 0.2s ease, color 0.2s ease, transform 0.2s ease;
+    }
+
+    .social-icon:hover {
+      background: #3aa0ff;
+      color: #0d1424;
+      transform: translateY(-2px);
+    }
+
+    .social-icon svg {
+      display: block;
+    }
+
+    .footer-column h3 {
+      font-family: Georgia, serif;
+      color: #ffffff;
+      font-size: 1.1rem;
+      margin-bottom: 16px;
+      padding-bottom: 8px;
+      border-bottom: 2px solid #3aa0ff;
+      display: inline-block;
+    }
+
+    .footer-links,
+    .contact-info {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+
+    .footer-links li {
+      margin-bottom: 12px;
+    }
+
+    .footer-links a {
+      color: #6fb8f0;
+      text-decoration: none;
+      font-size: 0.95rem;
+      transition: color 0.2s ease;
+    }
+
+    .footer-links a:hover {
+      color: #ffffff;
+    }
+
+    .contact-info li {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 14px;
+      color: #c7d0dd;
+      font-size: 0.95rem;
+    }
+
+    .contact-info svg,
+    .contact-info i {
+      color: #3aa0ff;
+      width: 16px;
+      flex-shrink: 0;
+    }
+
+    .footer-bottom {
+      max-width: 1200px;
+      margin: 0 auto;
+      border-top: 1px solid rgba(58, 160, 255, 0.2);
+      padding: 20px 0;
+      display: flex;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 10px;
+      font-size: 0.85rem;
+      color: #9fb0c3;
+    }
+
+    .footer-bottom a {
+      color: #3aa0ff;
+      text-decoration: none;
+    }
+
+    .footer-bottom a:hover {
+      text-decoration: underline;
+    }
+
+    @media (max-width: 768px) {
+      .footer-container {
+        text-align: center;
+      }
+      .social-links {
+        justify-content: center;
+      }
+      .footer-bottom {
+        flex-direction: column;
+        text-align: center;
+      }
+    }
+
+    /* ---------- SEÇÃO: BUSCAR ACADEMIA MAIS PRÓXIMA ---------- */
+    .find-gym {
+      background: #0b0b0d;
+      padding: 70px 20px;
+      color: #f2f2f2;
+      text-align: center;
+    }
+
+    .find-gym-title {
+      font-size: 1.6rem;
+      font-weight: 700;
+      margin-bottom: 30px;
+    }
+
+    .search-bar {
+      max-width: 560px;
+      margin: 0 auto 24px;
+      display: flex;
+      align-items: center;
+      background: #232326;
+      border-radius: 999px;
+      padding: 6px 6px 6px 24px;
+    }
+
+    .search-bar input {
+      flex: 1;
+      background: transparent;
+      border: none;
+      outline: none;
+      color: #fff;
+      font-size: 1rem;
+      padding: 12px 0;
+    }
+
+    .search-bar input::placeholder {
+      color: #9a9aa0;
+    }
+
+    .search-bar button {
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      border: none;
+      background: #3aa0ff;
+      color: #0b0b0d;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      flex-shrink: 0;
+      transition: background 0.2s ease;
+    }
+
+    .search-bar button:hover {
+      background: #6fb8f0;
+    }
+
+    .zone-filters {
+      display: flex;
+      justify-content: center;
+      gap: 12px;
+      margin-bottom: 36px;
+      flex-wrap: wrap;
+    }
+
+    .zone-btn {
+      background: transparent;
+      border: 1px solid #3aa0ff;
+      color: #3aa0ff;
+      padding: 8px 20px;
+      border-radius: 999px;
+      cursor: pointer;
+      font-size: 0.9rem;
+      transition: background 0.2s ease, color 0.2s ease;
+    }
+
+    .zone-btn:hover {
+      background: rgba(58, 160, 255, 0.15);
+    }
+
+    .zone-btn.active {
+      background: #3aa0ff;
+      color: #0b0b0d;
+      font-weight: 600;
+    }
+
+    .gym-results {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 20px;
+      max-width: 900px;
+      margin: 0 auto;
+      text-align: left;
+    }
+
+    .gym-card {
+      background: #17171a;
+      border: 1px solid #26262a;
+      border-radius: 14px;
+      padding: 20px;
+    }
+
+    .gym-card h4 {
+      margin: 0 0 6px;
+      font-size: 1.05rem;
+      color: #fff;
+    }
+
+    .gym-card .badge {
+      display: inline-block;
+      font-size: 0.72rem;
+      color: #3aa0ff;
+      border: 1px solid #3aa0ff;
+      border-radius: 999px;
+      padding: 2px 10px;
+      margin-bottom: 10px;
+    }
+
+    .gym-card p {
+      margin: 0 0 4px;
+      color: #b7b7bd;
+      font-size: 0.9rem;
+    }
+
+    .gym-card a.map-link {
+      display: inline-block;
+      margin-top: 10px;
+      color: #6fb8f0;
+      font-size: 0.85rem;
+      text-decoration: none;
+    }
+
+    .gym-card a.map-link:hover {
+      text-decoration: underline;
+    }
+
+    .no-result {
+      color: #9a9aa0;
+      margin-top: 10px;
+    }
+  </style>
+</head>
+<body>
+  <header class="site-header">
+    <div class="nav">
+      <div class="logo">Aura Fit</div>
+      <button class="menu-toggle" aria-label="Menu">☰</button>
+      <ul id="menu">
+        <li><a href="#inicio">Início</a></li>
+        <li><a href="#planos">Planos</a></li>
+        <li><a href="#modalidades">Modalidades</a></li>
+        <li><a href="#unidade">Unidades</a></li>
+        <li><a href="#contato">Contato</a></li>
+      </ul>
+    </div>
+  </header>
+
+  <section class="hero" id="inicio">
+    <!-- vídeo de fundo: autoplay + muted + loop faz ele tocar sozinho, sem precisar de JavaScript -->
+    <video class="bg-video" autoplay muted loop playsinline>
+      <source src="video/video1.mp4" type="video/mp4">
+    </video>
+    <div class="bg-overlay"></div>
+
+    <div class="hero-content">
+      <h1>Academia Aura Fit</h1>
+      <p>Venha ter mais aura</p>
+      <a href="#planos" class="btn">Ver planos</a>
+    </div>
+  </section>
+
+  <section id="modalidades">
+  <div class="container">
+    <h2>Modalidades</h2>
+    <p class="subtitle">Variedade para todos os seus objetivos</p>
+    <div class="grid">
+      <article class="card">
+        <img src="imagens/musculação.PNG" alt="Musculação" class="card-img">
+        <h3>Musculação</h3>
+        <p>Equipamentos modernos e acompanhamento profissional.</p>
+      </article>
+      <article class="card">
+        <img src="imagens/crossfit.PNG" alt="Crossfit" class="card-img">
+        <h3>Crossfit</h3>
+        <p>Queima de calorias. Treine no seu ritmo.</p>
+      </article>
+      <article class="card">
+        <img src="imagens/condicionamento.PNG" alt="Funcional" class="card-img">
+        <h3>Funcional</h3>
+        <p>Treinos dinâmicos para condicionamento total.</p>
+      </article>
+      <article class="card">
+        <img src="imagens/spinning.PNG" alt="Spinning" class="card-img">
+        <h3>Spinning</h3>
+        <p>Queime calorias ao ritmo da música.</p>
+      </article>
+      <article class="card">
+        <img src="imagens/lutas.PNG" alt="Lutas" class="card-img">
+        <h3>Lutas</h3>
+        <p>Defesa pessoal e disciplina.</p>
+      </article>
+      <article class="card">
+        <img src="imagens/dança.PNG" alt="Fit Dance" class="card-img">
+        <h3>Fit Dance</h3>
+        <p>Movimentos com o corpo. A dança te faz mais feliz.</p>
+      </article>
+      <article class="card">
+        <img src="imagens/yoga.PNG" alt="Meditação" class="card-img">
+        <h3>Meditação</h3>
+        <p>Aulas de yoga. Respire, alongue, conecte-se e evolua.</p>
+      </article>
+      <article class="card">
+        <img src="imagens/pilates.PNG" alt="Pilates" class="card-img">
+        <h3>Pilates</h3>
+        <p>Fortaleça o corpo, equilibre a mente.</p>
+      </article>
+      <article class="card">
+        <img src="imagens/massagem.PNG" alt="Massagem" class="card-img">
+        <h3>Massagem</h3>
+        <p>Relaxe o corpo depois de um treino pesado.</p>
+      </article>
+    </div>
+  </div>
+</section>
+
+  <!-- ============================= -->
+<!-- SEÇÃO: PLANOS COM CHECKLIST -->
+<!-- Substitui a seção #planos atual -->
+<!-- ============================= -->
+<section id="planos" style="background:#f4f6fa;">
+  <div class="container">
+    <h2>Planos</h2>
+    <p class="subtitle">Escolha o ideal para você</p>
+
+    <div class="plans-grid">
+
+      <!-- MENSAL -->
+      <article class="plan-card">
+        <button class="plan-btn" onclick="escolherPlano('Mensal')">Escolher plano Mensal</button>
+        <p class="plan-price">R$ 150<span>/mês</span></p>
+        <p class="plan-includes-label">Inclui</p>
+        <ul class="plan-features">
+          <li class="yes">Check-in ilimitado na unidade</li>
+          <li class="yes">Acesso à musculação</li>
+          <li class="no">Área de cardio</li>
+          <li class="no">Avaliação física inicial</li>
+          <li class="no">Acesso a todas as unidades (Zona Sul e Leste)</li>
+          <li class="no">Nutricionista incluso</li>
+        </ul>
+      </article>
+
+      <!-- TRIMESTRAL -->
+      <article class="plan-card">
+        <button class="plan-btn" onclick="escolherPlano('Trimestral')">Escolher plano Trimestral</button>
+        <p class="plan-price">R$ 300<span>/3 meses</span></p>
+        <p class="plan-includes-label">Inclui</p>
+        <ul class="plan-features">
+          <li class="yes">Check-in ilimitado na unidade</li>
+          <li class="yes">Acesso à musculação</li>
+          <li class="yes">Todas as modalidades (crossfit, spinning, lutas...)</li>
+          <li class="yes">Acompanhamento dos professores</li>
+          <li class="no">Acesso a todas as unidades (Zona Sul e Leste)</li>
+          <li class="no">Nutricionista incluso</li>
+        </ul>
+      </article>
+
+      <!-- ANUAL (destaque) -->
+      <article class="plan-card featured">
+        <span class="featured-tag">Mais completo</span>
+        <button class="plan-btn dark" onclick="escolherPlano('Anual')">Escolher plano Anual</button>
+        <p class="plan-price">R$ 550<span>/ano</span></p>
+        <p class="plan-includes-label">Inclui</p>
+        <ul class="plan-features">
+          <li class="yes">Check-in ilimitado na unidade</li>
+          <li class="yes">Acesso completo a academia</li>
+          <li class="yes">Todas as modalidades (crossfit, spinning, lutas...)</li>
+          <li class="yes">Avaliação física</li>
+          <li class="yes">Acesso a todas as unidades (Zona Sul e Leste)</li>
+          <li class="yes">Nutricionista incluso</li>
+        </ul>
+      </article>
+
+    </div>
+  </div>
+</section>
+
+<!-- ============================= -->
+<!-- CSS DA SEÇÃO (adicionar ao styles.css) -->
+<!-- ============================= -->
+<style>
+.plans-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 24px;
+  max-width: 1100px;
+  margin: 0 auto;
+}
+
+.plan-card {
+  position: relative;
+  background: #dbe9ff; /* azul clarinho, como na sua imagem 1 */
+  border-radius: 20px;
+  padding: 30px 26px;
+  text-align: left;
+}
+
+.plan-card.featured {
+  background: var(--primary, #1e3a8a);
+  color: #fff;
+}
+
+.featured-tag {
+  position: absolute;
+  top: -14px;
+  right: 24px;
+  background: #ffb703;
+  color: #1a1a1a;
+  font-size: 0.75rem;
+  font-weight: 700;
+  padding: 4px 14px;
+  border-radius: 999px;
+}
+
+.plan-btn {
+  display: block;
+  width: 100%;
+  background: #fff;
+  color: var(--primary, #1e3a8a);
+  border: none;
+  border-radius: 999px;
+  padding: 14px 20px;
+  font-weight: 700;
+  font-size: 0.95rem;
+  cursor: pointer;
+  margin-bottom: 24px;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.plan-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 16px rgba(0,0,0,0.15);
+}
+
+.plan-btn.dark {
+  background: #0d1424;
+  color: #fff;
+}
+
+.plan-price {
+  font-size: 2.2rem;
+  font-weight: 800;
+  color: var(--primary, #1e3a8a);
+  margin: 0 0 20px;
+}
+
+.plan-card.featured .plan-price {
+  color: #fff;
+}
+
+.plan-price span {
+  font-size: 0.95rem;
+  font-weight: 500;
+  opacity: 0.7;
+}
+
+.plan-includes-label {
+  font-weight: 700;
+  margin-bottom: 12px;
+  font-size: 0.95rem;
+}
+
+.plan-features {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.plan-features li {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  padding: 8px 0;
+  font-size: 0.92rem;
+  line-height: 1.4;
+}
+
+.plan-features li::before {
+  flex-shrink: 0;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.75rem;
+  font-weight: 900;
+  margin-top: 1px;
+}
+
+.plan-features li.yes {
+  color: inherit;
+}
+
+.plan-features li.yes::before {
+  content: "✓";
+  background: #16a34a;
+  color: #fff;
+}
+
+.plan-features li.no {
+  color: #8a94a3;
+}
+
+.plan-card.featured .plan-features li.no {
+  color: rgba(255,255,255,0.5);
+}
+
+.plan-features li.no::before {
+  content: "✕";
+  background: rgba(0,0,0,0.08);
+  color: #8a94a3;
+}
+
+.plan-card.featured .plan-features li.no::before {
+  background: rgba(255,255,255,0.15);
+  color: rgba(255,255,255,0.6);
+}
+</style>
+
+  <!-- ============================= -->
+  <!-- SEÇÃO: BUSCAR ACADEMIA MAIS PRÓXIMA -->
+  <!-- ============================= -->
+  <section id="unidade" class="find-gym">
+    <div class="container">
+      <h2 class="find-gym-title">Encontre uma academia Aura Fit perto de você.</h2>
+
+      <div class="search-bar">
+        <input
+          type="text"
+          id="buscaUnidade"
+          placeholder="Buscar academia mais próxima"
+          autocomplete="off"
+        />
+        <button type="button" id="btnBuscaUnidade" aria-label="Buscar">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="20" height="20">
+            <circle cx="11" cy="11" r="7"></circle>
+            <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+          </svg>
+        </button>
+      </div>
+
+      <div class="zone-filters">
+        <button class="zone-btn active" data-zona="todas">Todas</button>
+        <button class="zone-btn" data-zona="Zona Sul">Zona Sul</button>
+        <button class="zone-btn" data-zona="Zona Leste">Zona Leste</button>
+      </div>
+
+      <div id="resultadosUnidades" class="gym-results"></div>
+      <p id="semResultado" class="no-result" style="display:none;">Nenhuma unidade encontrada.</p>
+    </div>
+  </section>
+
+  <section id="contato">
+    <div class="container">
+      <h2>Fale conosco</h2>
+      <form class="contact" id="formContato" novalidate>
+        <div><label for="nome">Nome</label><input id="nome" required /></div>
+        <div><label for="email">E-mail</label><input id="email" type="email" required /></div>
+        <div><label for="mensagem">Mensagem</label><textarea id="mensagem" rows="4" required></textarea></div>
+        <button type="submit" class="btn primary">Enviar</button>
+        <div class="mensagem-feedback" id="feedback"></div>
+      </form>
+    </div>
+  </section>
+
+  <!-- ============================= -->
+  <!-- RODAPÉ -->
+  <!-- ============================= -->
+  <footer class="site-footer">
+    <div class="footer-container">
+
+      <!-- Coluna 1: Marca + Redes Sociais -->
+      <div class="footer-column footer-brand">
+        <span class="logo-text">💪 Aura Fit</span>
+        <p>Venha ter mais aura. Estrutura completa, professores qualificados e modalidades para todos os objetivos.</p>
+        <div class="social-links">
+
+          <!-- Instagram -->
+          <a href="#" aria-label="Instagram" class="social-icon">
+            <svg viewBox="0 0 24 24" fill="currentColor" width="18" height="18">
+              <path d="M12 2c2.7 0 3.05.01 4.12.06 1.06.05 1.79.22 2.43.47.66.26 1.22.6 1.77 1.15.55.55.9 1.11 1.15 1.77.25.64.42 1.37.47 2.43.05 1.07.06 1.42.06 4.12s-.01 3.05-.06 4.12c-.05 1.06-.22 1.79-.47 2.43a4.9 4.9 0 0 1-1.15 1.77 4.9 4.9 0 0 1-1.77 1.15c-.64.25-1.37.42-2.43.47-1.07.05-1.42.06-4.12.06s-3.05-.01-4.12-.06c-1.06-.05-1.79-.22-2.43-.47a4.9 4.9 0 0 1-1.77-1.15 4.9 4.9 0 0 1-1.15-1.77c-.25-.64-.42-1.37-.47-2.43C2.01 15.05 2 14.7 2 12s.01-3.05.06-4.12c.05-1.06.22-1.79.47-2.43.26-.66.6-1.22 1.15-1.77a4.9 4.9 0 0 1 1.77-1.15c.64-.25 1.37-.42 2.43-.47C8.95 2.01 9.3 2 12 2zm0 1.8c-2.65 0-2.97.01-4.02.06-.86.04-1.33.18-1.64.3-.41.16-.71.35-1.02.66-.31.31-.5.61-.66 1.02-.12.31-.26.78-.3 1.64C4.31 9.03 4.3 9.35 4.3 12s.01 2.97.06 4.02c.04.86.18 1.33.3 1.64.16.41.35.71.66 1.02.31.31.61.5 1.02.66.31.12.78.26 1.64.3 1.05.05 1.37.06 4.02.06s2.97-.01 4.02-.06c.86-.04 1.33-.18 1.64-.3.41-.16.71-.35 1.02-.66.31-.31.5-.61.66-1.02.12-.31.26-.78.3-1.64.05-1.05.06-1.37.06-4.02s-.01-2.97-.06-4.02c-.04-.86-.18-1.33-.3-1.64a2.7 2.7 0 0 0-.66-1.02 2.7 2.7 0 0 0-1.02-.66c-.31-.12-.78-.26-1.64-.3C14.97 3.81 14.65 3.8 12 3.8zm0 3.05a5.15 5.15 0 1 1 0 10.3 5.15 5.15 0 0 1 0-10.3zm0 1.8a3.35 3.35 0 1 0 0 6.7 3.35 3.35 0 0 0 0-6.7zm5.35-1.99a1.2 1.2 0 1 1-2.4 0 1.2 1.2 0 0 1 2.4 0z"/>
+            </svg>
+          </a>
+
+          <!-- WhatsApp -->
+          <a href="#" aria-label="WhatsApp" class="social-icon">
+            <svg viewBox="0 0 24 24" fill="currentColor" width="18" height="18">
+              <path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.75.46 3.45 1.32 4.95L2.05 22l5.3-1.38a9.9 9.9 0 0 0 4.69 1.19h.01c5.46 0 9.91-4.45 9.91-9.91 0-2.65-1.03-5.14-2.9-7.01A9.86 9.86 0 0 0 12.04 2zm0 18.15h-.01a8.2 8.2 0 0 1-4.19-1.15l-.3-.18-3.14.82.84-3.06-.2-.31a8.2 8.2 0 0 1-1.27-4.36c0-4.54 3.7-8.24 8.25-8.24 2.2 0 4.27.86 5.83 2.42a8.18 8.18 0 0 1 2.41 5.82c0 4.55-3.7 8.24-8.22 8.24zm4.52-6.17c-.25-.12-1.47-.72-1.7-.81-.23-.08-.4-.12-.56.12-.17.25-.65.81-.79.97-.15.17-.29.19-.54.06-.25-.12-1.04-.38-1.98-1.22-.73-.65-1.23-1.46-1.37-1.7-.14-.25-.02-.38.11-.5.11-.11.25-.29.37-.44.12-.15.16-.25.25-.42.08-.17.04-.31-.02-.44-.06-.12-.56-1.35-.77-1.85-.2-.48-.41-.42-.56-.43h-.48c-.17 0-.44.06-.67.31s-.88.86-.88 2.1.9 2.44 1.02 2.6c.12.17 1.77 2.7 4.29 3.79.6.26 1.07.41 1.43.53.6.19 1.15.16 1.58.1.48-.07 1.47-.6 1.68-1.18.21-.58.21-1.07.15-1.18-.06-.1-.23-.17-.48-.29z"/>
+            </svg>
+          </a>
+
+          <!-- TikTok -->
+          <a href="#" aria-label="TikTok" class="social-icon">
+            <svg viewBox="0 0 24 24" fill="currentColor" width="18" height="18">
+              <path d="M16.5 2h-3.2v13.3c0 1.44-1.17 2.62-2.62 2.62a2.62 2.62 0 0 1-2.62-2.62c0-1.44 1.17-2.6 2.6-2.62.24 0 .47.03.69.08V9.5a5.85 5.85 0 0 0-.69-.04A5.85 5.85 0 0 0 4.8 15.3a5.85 5.85 0 0 0 5.87 5.83 5.85 5.85 0 0 0 5.86-5.83V8.36a8.1 8.1 0 0 0 4.67 1.48V6.6a4.85 4.85 0 0 1-4.7-4.6z"/>
+            </svg>
+          </a>
+
+          <!-- Facebook -->
+          <a href="#" aria-label="Facebook" class="social-icon">
+            <svg viewBox="0 0 24 24" fill="currentColor" width="18" height="18">
+              <path d="M13.5 21v-7.9h2.66l.4-3.09h-3.06V8.04c0-.89.25-1.5 1.53-1.5h1.63V3.77c-.28-.04-1.25-.12-2.37-.12-2.35 0-3.95 1.43-3.95 4.06v2.28H7.7v3.09h2.64V21h3.16z"/>
+            </svg>
+          </a>
+
+        </div>
+      </div>
+
+      <!-- Coluna 2: Navegação -->
+      <div class="footer-column">
+        <h3>Navegação</h3>
+        <ul class="footer-links">
+          <li><a href="#inicio">Início</a></li>
+          <li><a href="#planos">Planos</a></li>
+          <li><a href="#modalidades">Modalidades</a></li>
+          <li><a href="#unidade">Unidades</a></li>
+          <li><a href="#contato">Contato</a></li>
+        </ul>
+      </div>
+
+      <!-- Coluna 3: Contato -->
+      <div class="footer-column">
+        <h3>Contato</h3>
+        <ul class="contact-info">
+          <li>
+            <i class="fab fa-whatsapp"></i>
+            <span>(11) 97085-9867</span>
+          </li>
+          <li>
+            <i class="fas fa-envelope"></i>
+            <span>aurafit@gmail.com</span>
+          </li>
+          <li>
+            <i class="fas fa-clock"></i>
+            <span>Seg - Sáb: 05:00 às 23:00</span>
+          </li>
+        </ul>
+      </div>
+
+    </div>
+
+    <!-- Linha final -->
+    <div class="footer-bottom">
+      <p>& copy; <span id="ano"></span> Aura Fit. Todos os direitos reservados.</p>
+      <p>Desenvolvido pela <a href="#">Empresa NovaEra</a></p>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+
+  <!-- ============================= -->
+  <!-- JS ADICIONADO: busca de unidades -->
+  <!-- Se preferir, mova este bloco para dentro do script.js -->
+  <!-- ============================= -->
+  <script>
+    // Lista de unidades — edite/adicione as suas academias aqui
+    const unidadesAuraFit = [
+      { nome: "Aura Fit Santo Amaro", zona: "Zona Sul", endereco: "Av. Santo Amaro, 1200 - Santo Amaro, São Paulo - SP" },
+      { nome: "Aura Fit Campo Belo", zona: "Zona Sul", endereco: "Av. Ibirapuera, 2450 - Campo Belo, São Paulo - SP" },
+      { nome: "Aura Fit Morumbi", zona: "Zona Sul", endereco: "Av. Morumbi, 670 - Morumbi, São Paulo - SP" },
+      { nome: "Aura Fit Jabaquara", zona: "Zona Sul", endereco: "Av. Engenheiro Armando de Arruda Pereira, 300 - Jabaquara, São Paulo - SP" },
+      { nome: "Aura Fit Tatuapé", zona: "Zona Leste", endereco: "Rua Tuiuti, 1580 - Tatuapé, São Paulo - SP" },
+      { nome: "Aura Fit Itaquera", zona: "Zona Leste", endereco: "Av. José Pinheiro Borges, 850 - Itaquera, São Paulo - SP" },
+      { nome: "Aura Fit Vila Matilde", zona: "Zona Leste", endereco: "Av. Águia de Haia, 2100 - Vila Matilde, São Paulo - SP" },
+      { nome: "Aura Fit São Miguel Paulista", zona: "Zona Leste", endereco: "Rua Itaoca, 430 - São Miguel Paulista, São Paulo - SP" }
+    ];
+
+    const inputBusca = document.getElementById("buscaUnidade");
+    const btnBusca = document.getElementById("btnBuscaUnidade");
+    const containerResultados = document.getElementById("resultadosUnidades");
+    const semResultado = document.getElementById("semResultado");
+    const botoesZona = document.querySelectorAll(".zone-btn");
+
+    let zonaAtiva = "todas";
+
+    function normalizar(texto) {
+      return texto
+        .toLowerCase()
+        .normalize("NFD")
+        .replace(/[\u0300-\u036f]/g, "");
+    }
+
+    function renderizarUnidades(lista) {
+      containerResultados.innerHTML = "";
+
+      if (lista.length === 0) {
+        semResultado.style.display = "block";
+        return;
+      }
+      semResultado.style.display = "none";
+
+      lista.forEach((unidade) => {
+        const card = document.createElement("div");
+        card.className = "gym-card";
+
+        const enderecoCodificado = encodeURIComponent(unidade.endereco);
+
+        card.innerHTML = `
+          <span class="badge">${unidade.zona}</span>
+          <h4>${unidade.nome}</h4>
+          <p>${unidade.endereco}</p>
+          <a class="map-link" href="https://www.google.com/maps/search/?api=1&query=${enderecoCodificado}" target="_blank" rel="noopener">
+            Ver no mapa →
+          </a>
+        `;
+        containerResultados.appendChild(card);
+      });
+    }
+
+    function filtrarUnidades() {
+      const termo = normalizar(inputBusca.value.trim());
+
+      const filtradas = unidadesAuraFit.filter((unidade) => {
+        const combinaTexto =
+          termo === "" ||
+          normalizar(unidade.nome).includes(termo) ||
+          normalizar(unidade.endereco).includes(termo) ||
+          normalizar(unidade.zona).includes(termo);
+
+        const combinaZona = zonaAtiva === "todas" || unidade.zona === zonaAtiva;
+
+        return combinaTexto && combinaZona;
+      });
+
+      renderizarUnidades(filtradas);
+    }
+
+    inputBusca.addEventListener("input", filtrarUnidades);
+    btnBusca.addEventListener("click", filtrarUnidades);
+    inputBusca.addEventListener("keydown", (e) => {
+      if (e.key === "Enter") filtrarUnidades();
+    });
+
+    botoesZona.forEach((botao) => {
+      botao.addEventListener("click", () => {
+        botoesZona.forEach((b) => b.classList.remove("active"));
+        botao.classList.add("active");
+        zonaAtiva = botao.dataset.zona;
+        filtrarUnidades();
+      });
+    });
+
+    document.addEventListener("DOMContentLoaded", () => {
+      renderizarUnidades(unidadesAuraFit);
+    });
+  </script>
+</body>
+</html>

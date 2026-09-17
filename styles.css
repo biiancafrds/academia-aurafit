@@ -1,0 +1,570 @@
+/* =========================================================
+   Academia Iron Power
+   Folha de estilos principal.
+   Conceitos: variáveis CSS, seletores, flexbox, grid,
+   responsividade, transições e hover.
+   ========================================================= */
+
+/* Variáveis (Custom Properties) — facilitam manter o tema */
+:root {
+  --primary: #001d65;
+  --accent: #009ca7;
+  --bg: #030627fd;
+  --text: #003d92;
+  --muted: #000654;
+  --card: #73b6fac3;
+  --radius: 14px;
+  --shadow: 0 10px 30px rgba(0,0,0,.08);
+  --container: 1100px;
+ font-family:Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+}
+
+/* Reset simples para padronizar entre navegadores */
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+html { scroll-behavior: smooth; } /* rolagem suave para âncoras */
+
+body {
+  font-family: 'arial', system-ui, -apple-system, sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  line-height: 1.6;
+}
+
+img { max-width: 100%; display: block; }
+
+/* Container central reutilizável */
+.container {
+  max-width: var(--container);
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+/* ---------- HEADER / NAV ---------- */
+header.site-header {
+  background: var(--primary);
+  color: #fff;
+  position: sticky; /* fixa ao rolar */
+  top: 0;
+  z-index: 50;
+  box-shadow: var(--shadow);
+}
+.nav {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 16px 20px;
+  max-width: var(--container);
+  margin: 0 auto;
+}
+.nav .logo { font-weight: 800; font-size: 1.25rem; letter-spacing: .5px; }
+.nav ul { display: flex; gap: 22px; list-style: none; }
+.nav a { color: #f3eded; text-decoration: none; opacity: .9; transition: opacity .2s; }
+.nav a:hover { opacity: 1; text-decoration: underline; }
+
+/* botão hambúrguer (mobile) */
+.menu-toggle {
+  display: none;
+  background: transparent;
+  border: 0;
+  color: #fff;
+  font-size: 1.6rem;
+  cursor: pointer;
+}
+
+/* ---------- HERO ---------- */
+.hero {
+  position: relative;
+  overflow: hidden;              /* mantém o vídeo dentro dos limites do hero */
+  min-height: 60vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  padding: 80px 20px;
+  text-align: center;
+  /* gradiente como fallback, visível enquanto o vídeo carrega ou se ele falhar */
+  background: linear-gradient(135deg, var(--primary), var(--accent));
+}
+
+/* vídeo cobre todo o hero (e não a tela inteira) */
+.bg-video {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  min-width: 100%;
+  min-height: 100%;
+  width: auto;
+  height: auto;
+  transform: translate(-50%, -50%);
+  object-fit: cover;
+  z-index: 0;
+}
+
+/* camada escura por cima do vídeo, para o texto ficar legível */
+.bg-overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(1, 39, 134, 0.152);
+  z-index: 1;
+}
+
+.hero-content {
+  position: relative;
+  z-index: 2; /* fica acima do vídeo e do overlay */
+}
+
+.hero h1 { font-size: clamp(1.8rem, 4vw, 3rem); margin-bottom: 14px; }
+.hero p { font-size: 1.1rem; max-width: 640px; margin: 0 auto 26px; opacity: .95; }
+
+/* botão reutilizável */
+.btn {
+  display: inline-block;
+  background: #fff;
+  color: var(--primary);
+  padding: 12px 26px;
+  border-radius: 999px;
+  text-decoration: none;
+  font-weight: 700;
+  border: 0;
+  cursor: pointer;
+  transition: transform .15s ease, box-shadow .15s ease;
+}
+.btn:hover { transform: translateY(-2px); box-shadow: var(--shadow); }
+.btn.primary { background: var(--primary); color: #fff; }
+
+/* ---------- SEÇÕES ---------- */
+section { padding: 70px 0; }
+section h2 {
+  text-align: center;
+  font-size: 2rem;
+  margin-bottom: 10px;
+  color: var(--primary);
+}
+section .subtitle {
+  text-align: center;
+  color: var(--muted);
+  margin-bottom: 40px;
+}
+
+/* Grid de cards reutilizável */
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 22px;
+}
+.card {
+  background: var(--card);
+  border-radius: var(--radius);
+  padding: 25px;
+  box-shadow: var(--shadow);
+  transition: transform .3s;
+}
+.card:hover { transform: translateY(-10px); }
+.card .icon { font-size: 2.8rem; margin-bottom: 0px; }
+.card h3 { color: var(--primary); margin-bottom: 8px; }
+.card p { color: var(--muted); font-size: .95rem; }
+/*aopassar o mouse, a imagem da um leve zoom */
+.card:hover img{
+    transform: scale(1,2);
+}
+/* o conteúdo do card fica escondido embaixo, fora da vista*/
+.card-conteudo{
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    padding: 20px;
+    color:#ffffff;
+    background: linear-gradient(to top, rgba(0,0,0,0.9),transparent);
+    /*começa deslocando para baixo invisível*/
+    transform: translateY(60%);
+    opacity: 0;
+    transition: transform 0,4s ease, opacity 0.4s ease;
+}
+/*ao passar o mouse no card, o conteúdo sobe e aparece*/
+.card:hover .card-conteudo{
+    transform: translateY(0);
+    opacity: 1;
+}
+.card-conteudo h3{
+    font-size:1.3rem;
+    margin-bottom: 8px;
+}
+.card-conteudo p{
+    font-size: 0.9rem;
+    margin-bottom: 14px;
+    opacity: 0.9;
+}
+
+/* Título "Fale conosco" em branco (sobrescreve a cor padrão de section h2) */
+#contato h2 {
+  color: #ffffff;
+}
+
+/* Diminui só o card do formulário de contato */
+form.contact {
+  max-width: 460px;   /* era 560px */
+  padding: 22px;      /* era 30px */
+  gap: 12px;          /* era 14px */
+}
+
+form.contact input,
+form.contact textarea {
+  padding: 10px 12px; /* era 12px 14px */
+  font-size: 0.95rem;
+}
+
+form.contact textarea {
+  min-height: 90px;
+}
+/* Título e subtítulo de "Modalidades" em branco */
+#modalidades h2 {
+  color: #ffffff;
+}
+
+#modalidades .subtitle {
+  color: #c7d0dd;
+}
+
+/* Título da busca de unidades em branco */
+.find-gym-title {
+  color: #ffffff;
+}
+
+/* Fundo no mesmo tom azul da seção Modalidades */
+.find-gym {
+  color: #030627fd;
+}
+
+/* Cards de modalidades: texto só aparece no hover */
+#modalidades .card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  min-height: 220px; /* mantém o card com altura fixa, evita "pulo" */
+  transition: background 0.3s ease;
+  cursor: pointer;
+}
+
+#modalidades .card .icon {
+  font-size: 2.5rem;
+  transition: transform 0.3s ease, margin 0.3s ease;
+}
+
+#modalidades .card h3,
+#modalidades .card p {
+  opacity: 0;
+  max-height: 0;
+  overflow: hidden;
+  transition: opacity 0.3s ease, max-height 0.3s ease, margin 0.3s ease;
+  margin: 0;
+}
+
+/* Ao passar o mouse: aparece o texto */
+#modalidades .card:hover .icon {
+  transform: translateY(-6px);
+  margin-bottom: 4px;
+}
+
+#modalidades .card:hover h3 {
+  opacity: 1;
+  max-height: 40px;
+  margin: 10px 0 6px;
+}
+
+#modalidades .card:hover p {
+  opacity: 1;
+  max-height: 100px;
+  margin-top: 4px;
+}
+/* Grid maior */
+#modalidades .grid {
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 24px;
+}
+
+/* Cards de modalidades com imagem + texto só no hover */
+#modalidades .card {
+  position: relative;
+  overflow: hidden;
+  border-radius: 16px;
+  min-height: 320px; /* card maior */
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  padding: 0;
+  cursor: pointer;
+}
+
+#modalidades .card-img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.4s ease, filter 0.4s ease;
+}
+
+#modalidades .card:hover .card-img {
+  transform: scale(1.08);
+  filter: brightness(0.5);
+}
+
+#modalidades .card h3,
+#modalidades .card p {
+  position: relative;
+  z-index: 2;
+  color: #fff;
+  opacity: 0;
+  max-height: 0;
+  overflow: hidden;
+  padding: 0 20px;
+  transition: opacity 0.3s ease, max-height 0.3s ease, margin 0.3s ease;
+  margin: 0;
+}
+
+#modalidades .card:hover h3 {
+  opacity: 1;
+  max-height: 40px;
+  margin: 0 0 6px;
+}
+
+#modalidades .card:hover p {
+  opacity: 1;
+  max-height: 100px;
+  margin-bottom: 20px;
+}
+
+/* ---------- FORMULÁRIO ---------- */
+form.contact {
+  max-width: 560px;
+  margin: 0 auto;
+  background: var(--card);
+  padding: 30px;
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  display: grid;
+  gap: 14px;
+}
+form.contact label { font-weight: 600; font-size: .9rem; }
+form.contact input,
+form.contact select,
+form.contact textarea {
+  width: 100%;
+  padding: 12px 14px;
+  border: 1px solid #e5e7eb;
+  border-radius: 10px;
+  font-family: inherit;
+  font-size: 1rem;
+  transition: border-color .2s, box-shadow .2s;
+}
+form.contact input:focus,
+form.contact textarea:focus,
+form.contact select:focus {
+  outline: none;
+  border-color: var(--primary);
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--primary) 20%, transparent);
+}
+
+.mensagem-feedback {
+  margin-top: 14px;
+  padding: 12px;
+  border-radius: 10px;
+  background: #ecfdf5;
+  color: #065f46;
+  text-align: center;
+  display: none;
+}
+.mensagem-feedback.erro { background: #fef2f2; color: #991b1b; }
+
+
+
+<!-- ============================= -->
+<!-- CSS DO RODAPÉ (adicionar ao styles.css) -->
+<!-- ============================= -->
+
+.site-footer {
+  background: #0d1424;
+  color: #c7d0dd;
+  padding: 60px 40px 0;
+  font-family: inherit;
+}
+
+.footer-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 40px;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding-bottom: 40px;
+  text-align: left;
+}
+
+.footer-column {
+  flex: 1;
+  min-width: 200px;
+}
+
+.footer-brand {
+  flex: 1.5;
+  min-width: 260px;
+}
+
+.logo-text {
+  font-family: Georgia, serif;
+  font-size: 1.6rem;
+  color: #ffffff;
+  display: block;
+  margin-bottom: 16px;
+}
+
+.footer-brand p {
+  color: #9fb0c3;
+  line-height: 1.6;
+  margin-bottom: 20px;
+  font-size: 0.95rem;
+}
+
+.social-links {
+  display: flex;
+  gap: 12px;
+}
+
+/* bolinhas com as logos reais */
+.social-icon {
+  width: 38px;
+  height: 38px;
+  border: 1px solid #3aa0ff;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #3aa0ff;
+  text-decoration: none;
+  transition: background 0.2s ease, color 0.2s ease, transform 0.2s ease;
+}
+
+.social-icon:hover {
+  background: #3aa0ff;
+  color: #0d1424;
+  transform: translateY(-2px);
+}
+
+.social-icon svg {
+  display: block;
+}
+
+.footer-column h3 {
+  font-family: Georgia, serif;
+  color: #ffffff;
+  font-size: 1.1rem;
+  margin-bottom: 16px;
+  padding-bottom: 8px;
+  border-bottom: 2px solid #3aa0ff;
+  display: inline-block;
+}
+
+.footer-links,
+.contact-info {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.footer-links li {
+  margin-bottom: 12px;
+}
+
+.footer-links a {
+  color: #6fb8f0;
+  text-decoration: none;
+  font-size: 0.95rem;
+  transition: color 0.2s ease;
+}
+
+.footer-links a:hover {
+  color: #ffffff;
+}
+
+.contact-info li {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 14px;
+  color: #c7d0dd;
+  font-size: 0.95rem;
+}
+
+.contact-info svg,
+.contact-info i {
+  color: #00297b;
+  width: 16px;
+  flex-shrink: 0;
+}
+
+.footer-bottom {
+  max-width: 1200px;
+  margin: 0 auto;
+  border-top: 1px solid rgba(58, 160, 255, 0.2);
+  padding: 20px 0;
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 10px;
+  font-size: 0.85rem;
+  color: #9fb0c3;
+}
+
+.footer-bottom a {
+  color: #00297b;
+  text-decoration: none;
+}
+
+.footer-bottom a:hover {
+  text-decoration: underline;
+}
+
+@media (max-width: 768px) {
+  .footer-container {
+    text-align: center;
+  }
+  .social-links {
+    justify-content: center;
+  }
+  .footer-bottom {
+    flex-direction: column;
+    text-align: center;
+  }
+}
+
+@media (max-width: 768px) {
+  .footer-container {
+    text-align: center;
+  }
+  .social-links {
+    justify-content: center;
+  }
+  .footer-bottom {
+    flex-direction: column;
+    text-align: center;
+  }
+}
+/* ---------- RESPONSIVO ---------- */
+@media (max-width: 720px) {
+  .nav ul {
+    display: none;
+    position: absolute;
+    top: 60px; left: 0; right: 0;
+    flex-direction: column;
+    background: var(--primary);
+    padding: 14px 20px;
+    gap: 12px;
+  }
+  .nav ul.open { display: flex; }
+  .menu-toggle { display: block; }
+
+  .hero { min-height: 50vh; padding: 60px 16px; }
+}
